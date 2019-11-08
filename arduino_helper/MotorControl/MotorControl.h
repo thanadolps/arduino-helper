@@ -10,16 +10,16 @@ private:
     Pin enable;
     Pin in1;
     Pin in2;
-    bool inverse;
     int calibration_offset;  // actual power = code power + calibration_offset
 public:
+    bool inverse;
+
     MotorControl(Pin enable, Pin in1, Pin in2, bool inverse=false, int calibration_offset=0);
     ~MotorControl();
 
     void setSpeedPWD(int speed);
     void setSpeedPercentage(int speed_percentage);
     void setSpeedRatio(float speed_ratio);
-    u16 getSpeed();
 
     void setCalibration(int offset) {
         this->calibration_offset = offset;
@@ -48,7 +48,7 @@ MotorControl::MotorControl(Pin enable, Pin in1, Pin in2, bool inverse, int calib
     this->in1.setOutputLow();
     this->in2.setOutputLow();
 
-    #ifdef DEBUG
+    #ifdef THANADOL_HELPER_SERIAL_DEBUG
     if(Serial && !digitalPinHasPWM(enable.getNumber())) {
         char str[65];
         sprintf(str, "WARNING: Pin %d doesn't have pwm but the software expected it", enable.getNumber());
@@ -91,10 +91,6 @@ void MotorControl::setSpeedPercentage(int percentage)
 /// set motor speed as ratio (0.0 -> 1.0)
 void MotorControl::setSpeedRatio(float ratio) {
     this->setSpeedPWD((int)(ratio * 255.0f));
-}
-
-u16 MotorControl::getSpeed() {
-    return this->enable.getAnalogValue();
 }
 
 void MotorControl::stop() {

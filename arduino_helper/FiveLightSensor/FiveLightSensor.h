@@ -12,8 +12,9 @@ public:
     FiveLightSensor(Pin in1, Pin in2, Pin in3, Pin in4, Pin in5);
     ~FiveLightSensor();
 
+    #ifdef THANADOL_HELPER_SERIAL_DEBUG
     void serialPrint();
-
+    #endif
 
     Pin r1_pin() { return this->sensors[3]; }
     Pin r2_pin() { return this->sensors[4]; }
@@ -57,7 +58,7 @@ FiveLightSensor::FiveLightSensor(Pin in1, Pin in2, Pin in3, Pin in4, Pin in5)
 }
 
 
-#ifdef USB
+#ifdef THANADOL_HELPER_SERIAL_DEBUG
 void FiveLightSensor::serialPrint() {
     for(auto sensor : sensors) {
         Serial.print(sensor.getValue());

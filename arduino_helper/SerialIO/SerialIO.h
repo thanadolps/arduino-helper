@@ -26,6 +26,10 @@ public:
         }
     }
 
+    /**
+     * read bytes from serial and return it as i8
+     * can fail if serial don't contains enough byte
+    */
     static int8_t read_i8(Stream* serial) {
         byte byte_buffer[1];
         serial->readBytes(byte_buffer, 1);
@@ -39,6 +43,11 @@ public:
         return (((int16_t) buffer[0]) & 0xff) | (((int16_t) buffer[1]) << 8 & 0xff00);
     }
 
+    /**
+     * simiar to read_i8 but wait for serial to contain enough byte first.
+     * 
+     * @param re_recieve_interval interval (in ms) between checking if serial contain enought byte
+    */
     static int8_t wait_to_read_i8(Stream* serial, int re_recieve_interval) {
         wait_for_bytes(serial, 1, re_recieve_interval);
         return read_i8(serial);

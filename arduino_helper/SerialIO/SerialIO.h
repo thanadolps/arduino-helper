@@ -5,14 +5,7 @@
 #include <SoftwareSerial.h>
 
 class SerialIO {
-public:
-    
-    static void wait_for_bytes(Stream* serial, int n_byte, int re_recieve_interval) {
-        while(serial->available() < n_byte) {
-            delay(re_recieve_interval);
-        }
-    }
-
+private:
     static void read_signed_bytes(Stream* serial, int8_t* buffer, size_t n)
     {
         size_t i = 0;
@@ -23,6 +16,13 @@ public:
             if (c < 0) break;
             *buffer++ = (int8_t) c;
             i++;
+        }
+    }
+public:
+    
+    static void wait_for_bytes(Stream* serial, int n_byte, int re_recieve_interval) {
+        while(serial->available() < n_byte) {
+            delay(re_recieve_interval);
         }
     }
 

@@ -58,6 +58,53 @@ public:
         return read_i16(serial);
     }
 
+
+    // Print Helper
+
+    template<typename T>
+    static void print_to(Stream* serial, T out) {
+        serial->print(out);
+    }
+
+    template<typename T, typename... Args>
+    static void print_to(Stream* serial, T out, Args... args) {
+        serial->print(out);
+        serial->print(' ');
+        print_to(serial, args...);
+    }
+
+    template<typename T>
+    static void println_to(Stream* serial, T out) {
+        serial->println(out);
+    }
+
+    template<typename T, typename... Args>
+    static void println_to(Stream* serial, T out, Args... args) {
+        print_to(serial, out, args...);
+        serial->println();
+    }
+
+
+    template<typename T>
+    static void print(T out) {
+        print_to(&Serial, out);
+    }
+
+    template<typename T, typename... Args>
+    static void print(T out, Args... args) {
+        print_to(&Serial, out, args...);
+    }
+
+    template<typename T>
+    static void println(T out) {
+        println_to(&Serial, out);
+    }
+
+    template<typename T, typename... Args>
+    static void println(T out, Args... args) {
+        println_to(&Serial, out, args...);
+    }
+
 };
 
 

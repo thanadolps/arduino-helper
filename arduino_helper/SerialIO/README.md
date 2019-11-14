@@ -11,11 +11,16 @@ Another way is to send the number as byte which is significantly cheaper than pr
 In order to fix that, Serial IO provide a helper function for reading/writing number from serial directly from byte. make sending number both easy and quick
 
 ## Function
-All of `SerialIO` method are static and require Serial object pointer in first argument.
+Most of `SerialIO` method are static and require Serial object pointer in first argument.
 
-The list is show for i8, but similary method for i16 exist. (i32, i64) are planed but not yet implement
+The list is show for i8, but similar method for i16 exist. (i32, i64) are planed but not yet implement
 * `SerialIO::read_i8`: read bytes from serial and return it as i8, can fail if serial don't contains enough byte
 * `SerialIO::wait_to_read_i8`: wait for serial to contain enough byte then do `SerialIO::read_i8`
+
+### Subhelper Function
+SeriaIO additionally contain `print` and `println` for print to Serial, thier syntax is inspired by python's print.
+
+To use it with other Serial, use `print_to` and `println_to`.
 
 ## Example
 ```cpp

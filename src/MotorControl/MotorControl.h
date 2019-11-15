@@ -37,14 +37,13 @@ public:
 };
 
 // TODO: change serial to optional
-MotorControl::MotorControl(Pin enable, Pin in1, Pin in2, bool inverse, int calibration_offset) 
-{
-    this->enable = enable;
-    this->in1 = in1;
-    this->in2 = in2;
-    this->inverse = inverse;
-    this->calibration_offset;
-    
+MotorControl::MotorControl(Pin enable, Pin in1, Pin in2, bool inverse, int calibration_offset): 
+    enable(enable),
+    in1(in1),
+    in2(in2),
+    inverse(inverse),
+    calibration_offset(calibration_offset)
+{   
     this->in1.setOutputLow();
     this->in2.setOutputLow();
 

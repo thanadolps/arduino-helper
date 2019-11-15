@@ -5,6 +5,5 @@
 #include "MotorControl/MotorControl.h"
 #include "FiveLightSensor/FiveLightSensor.h"
 #include "SerialIO/SerialIO.h"
-#include "Range/Range.h"
 
 #endif
